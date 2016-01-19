@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta content="telephone=no,email=no" name="format-detection" />
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../dist/lib/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="../dist/lib/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="http://news.sohu.com/upload/commonzzx/normal.css">
+    <script src="../dist/lib/zepto.min.js"></script>
+    <script src="http://news.sohu.com/upload/commonzzx/preload.js"></script>
+	<script type="text/javascript" src="../dist/lib/swiper.jquery.min.js"></script>
+	 
+	<title>template</title>
+
+	<style type="text/css">
+		*{padding: 0;margin: 0;}
+		html,body,.main{
+			height: 100%;
+			overflow: hidden;
+			background: rgb(27,27,27);
+		}
+		.swiper-container,.swiper-wrapper,.swiper-slide{
+			height: 100%;
+		}
+
+		.outer{
+			background: url(../dist/img/bg.png);
+		}
+
+		#btn{
+			width: 100px;
+			height: 100px;
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="loading">
+	    <div class="pace">
+	      <div class="pace-progress">
+	        0
+	      </div>
+	    </div>
+	</div>
+
+	<script type="text/javascript">
+
+		function pageUtil(selector){
+			this.ele = document.querySelectorAll(selector)[0];
+			this.scaleNum = document.documentElement.clientWidth/640;
+			return this;
+		}
+		pageUtil.prototype.response = function(height){
+		    this.ele.style.cssText = "-webkit-transform-origin: 0 0 0px; -webkit-transform: scale("+this.scaleNum+");position: absolute;width:640px;height:"+(height||1136)+"px";
+		    return this;
+		}
+		pageUtil.prototype.rotate = function(){
+			this.ele["style"]["cssText"] = "width: "+1136+"px;height: "+640+"px;-webkit-transform:rotate(90deg) translate(-50%,-50%);"+
+			"-webkit-transform-origin:0 0; position: absolute; top: 50%; left: 50%;"
+			return this;
+		}
+
+
+		  // 自适应屏幕配置
+		function initView() {
+			new pageUtil(".main").response(1008);
+		    var swiper = new Swiper('.outer',{
+		    	direction:"vertical"
+		    });
+
+		    var innerSwiper = new Swiper(".inner",{
+		    	direction:"horizontal",
+		    	loop:"true"
+		    });
+	    }
+
+		  //懒加载
+		var loader = new resLoader({
+		    resources: [		       
+			    "http://news.sohu.com/upload/yursilewrj1913/imgs/wrj9.jpg"
+		    ],
+		    onStart: function(total) {},
+		    onProgress: function(current, total) {
+		      var percent = parseInt(current / total * 100) + '%';
+		      $('.pace-progress').text(percent);
+		    },
+		    onComplete: function(total) {
+		      $('.loading').hide();
+		      initView();
+		    }
+		});
+		loader.start();
+	</script>
+
+
+	<div class="main">
+
+
+
+		<div class="swiper-container outer">
+		  	<div class="swiper-wrapper">
+			    <div class="swiper-slide" data-index="0" >
+			    	<div class="titlePic"></div>
+
+
+			    	<div id="screen_2">
+						<button id="btn">点我</button>
+						<div class="ctn"></div>
+					</div>
+			    	<input type="button" class="btn" value="click">
+			    </div>
+			    <div class="swiper-slide" data-index="1" >			    	
+			    	<div class="swiper-container inner">
+			    		<div class="swiper-wrapper">
+			    			<div class="swiper-slide"><img class="pic" src="../dist/img/pic1.jpg"  width="100%" alt=""></div>
+			    			<div class="swiper-slide"><img class="pic" src="http://news.sohu.com/upload/yursilewrj1913/imgs/wrj5.jpg"  width="100%" alt=""></div>
+			    		</div>
+			    	</div>
+			    </div>
+			    <div class="swiper-slide" data-index="2" > <img class="pic" src="http://news.sohu.com/upload/yursilewrj1913/imgs/wrj3.jpg"  width="100%" alt=""></div>
+		    </div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../dist/js/main.min.js"></script>
+	<script type="text/javascript">
+		(function(){
+			var  imgUrl= 'http://news.sohu.com/upload/papa/images/share.jpg';
+			var link = window.location.href;
+			var title='打脸啪啪啪！被玩坏了的体坛工资单';
+			var content='注意！！打开此页面前请自备速效救心丸';
+			appid = "";
+			gSound = '';
+			function shareFriend() {
+			    WeixinJSBridge.invoke("sendAppMessage", {
+			        appid: appid,
+			        img_url: imgUrl,
+			        img_width: "200",
+			        img_height: "200",
+			        link: link,
+			        desc: content,
+			        title: title
+			    }, function(b) {})
+			}
+
+			function shareTimeline() {
+			    WeixinJSBridge.invoke("shareTimeline", {
+			        appid: appid,
+			        img_url: imgUrl,
+			        img_width: "200",
+			        img_height: "200",
+			        link: link,
+			        desc: content,
+			        title: title
+			    }, function(b) {})
+			}
+
+			function shareWeibo() {
+			    WeixinJSBridge.invoke("shareWeibo", {
+			        content: content,
+			        url: link
+			    }, function(b) {})
+			}
+			document.addEventListener("WeixinJSBridgeReady", function onBridgeReady() {
+			    WeixinJSBridge.on("menu:share:appmessage", function(b) {
+			        shareFriend();
+			    });
+			    WeixinJSBridge.on("menu:share:timeline", function(b) {
+			        shareTimeline();
+			    });
+			    WeixinJSBridge.on("menu:share:weibo", function(b) {
+			        shareWeibo();
+			    })
+			}, false);
+		})();
+
+	    var _hmt = _hmt || [];
+	    (function() {
+	     	var hm = document.createElement("script");
+	    	hm.src = "hm.baidu.com/hm.js?c154d502f02b12a996c34a02281a3bff";
+	     	var s = document.getElementsByTagName("script")[0];
+	     	s.parentNode.insertBefore(hm, s);
+	 	})();	
+	</script>
+
+</body>
+</html>
