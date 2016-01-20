@@ -13,7 +13,7 @@
     <script src="../dist/lib/zepto.min.js"></script>
     <script src="http://news.sohu.com/upload/commonzzx/preload.js"></script>
 	<script type="text/javascript" src="../dist/lib/swiper.jquery.min.js"></script>
-	 
+	<script type="text/javascript" src="../dist/lib/Tween.min.js"></script>
 	<title>template</title>
 
 	<style type="text/css">
@@ -23,17 +23,20 @@
 			overflow: hidden;
 			background: rgb(27,27,27);
 		}
-		.swiper-container,.swiper-wrapper,.swiper-slide{
-			height: 100%;
-		}
+	
 
-		.outer{
+		/*.outer>.swiper-wrapper{
 			background: url(../dist/img/bg.png);
+		}*/
+		.swiper-container{
+			height:100%;
 		}
 
 		#btn{
 			width: 100px;
 			height: 100px;
+			position: absolute;left: 0;top: 0;
+			z-index: 10;
 		}
 	</style>
 </head>
@@ -63,18 +66,35 @@
 			"-webkit-transform-origin:0 0; position: absolute; top: 50%; left: 50%;"
 			return this;
 		}
+		var innerSwiper;
 
 
 		  // 自适应屏幕配置
 		function initView() {
 			new pageUtil(".main").response(1008);
 		    var swiper = new Swiper('.outer',{
-		    	direction:"vertical"
+		    	touchRatio : 2,
+		    	direction:"vertical",
+		    	onSlideChangeEnd: function(swiper){
+			    	if(swiper.activeIndex==1){
+			    		$(".tip").addClass("animated bounceIn");
+						setTimeout(function(){
+							$(".tip").removeClass("animated");	
+						},1800);
+			    	}	
+			    }
 		    });
 
-		    var innerSwiper = new Swiper(".inner",{
+		    innerSwiper = new Swiper(".inner",{
 		    	direction:"horizontal",
-		    	loop:"true"
+
+// 		    	freeMode : true,
+// freeModeSticky : true,
+		    	watchSlidesProgress : true,
+				watchSlidesVisibility : true,
+				slidesPerView:3,
+				loop:true,
+				pagination : '.swiper-pagination'
 		    });
 	    }
 
@@ -103,26 +123,56 @@
 
 		<div class="swiper-container outer">
 		  	<div class="swiper-wrapper">
-			    <div class="swiper-slide" data-index="0" >
-			    	<div class="titlePic"></div>
-
-
+			    <div class="swiper-slide outer1" data-index="0" >
 			    	<div id="screen_2">
-						<button id="btn">点我</button>
+			    		<div class="titlePic"></div>
+					<!-- 	<button id="btn" class="btn">点我</button> -->
 						<div class="ctn"></div>
+						<div class="smoke"></div>
 					</div>
-			    	<input type="button" class="btn" value="click">
+
 			    </div>
-			    <div class="swiper-slide" data-index="1" >			    	
+			    <div class="swiper-slide outer2" data-index="1" >	
+
+			    	<div class="fires"></div>
+    				<div class="word"></div>
+
+    				<div class="button"></div>
+    				<div class="buttonBg"></div>
+					
+					<div class="left"></div>
+					<div class="right"></div>
+					<div class="tip"></div>
+
+
 			    	<div class="swiper-container inner">
 			    		<div class="swiper-wrapper">
-			    			<div class="swiper-slide"><img class="pic" src="../dist/img/pic1.jpg"  width="100%" alt=""></div>
-			    			<div class="swiper-slide"><img class="pic" src="http://news.sohu.com/upload/yursilewrj1913/imgs/wrj5.jpg"  width="100%" alt=""></div>
+			    			<div class="swiper-slide inner-slide inner1" >
+			    			</div>
+
+			    			<div class="swiper-slide inner-slide inner2" ></div>
+			    			<div class="swiper-slide inner-slide inner3" ></div>
+			    			<div class="swiper-slide inner-slide inner4" ></div>
+			    			<div class="swiper-slide inner-slide inner5" ></div>
+			    			<div class="swiper-slide inner-slide inner6" ></div>
+			    			<div class="swiper-slide inner-slide inner7" ></div>
+			    			<div class="swiper-slide inner-slide inner8" ></div>
+			    			<div class="swiper-slide inner-slide inner9" ></div>
+			    			<div class="swiper-slide inner-slide inner10" ></div>
+			    			
 			    		</div>
+			    		<div class="swiper-pagination"></div>
 			    	</div>
 			    </div>
-			    <div class="swiper-slide" data-index="2" > <img class="pic" src="http://news.sohu.com/upload/yursilewrj1913/imgs/wrj3.jpg"  width="100%" alt=""></div>
+
+
+<!-- 
+			    <div class="swiper-slide bg3" data-index="2" > <img class="pic" src="../dist/img/result1.gif"  width="100%" alt=""></div> -->
 		    </div>
+		</div>
+
+		<div class="result-container">
+			 <img class="pic" src="../dist/img/result1.gif"  width="100%" alt="">
 		</div>
 	</div>
 	<script type="text/javascript" src="../dist/js/main.min.js"></script>

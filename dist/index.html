@@ -1,20 +1,23 @@
-<!DOCTYPE html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1"><meta content=yes name="apple-mobile-web-app-capable"><meta content=yes name="apple-touch-fullscreen"><meta content="telephone=no,email=no" name="format-detection"><link rel=stylesheet href=../dist/css/main.css><link rel=stylesheet type=text/css href=../dist/lib/animate.min.css><link rel=stylesheet type=text/css href=../dist/lib/swiper.min.css><link rel=stylesheet type=text/css href=http://news.sohu.com/upload/commonzzx/normal.css><script src=../dist/lib/zepto.min.js></script><script src=http://news.sohu.com/upload/commonzzx/preload.js></script><script type=text/javascript src=../dist/lib/swiper.jquery.min.js></script><title>template</title><style type=text/css>*{padding: 0;margin: 0;}
+<!DOCTYPE html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1"><meta content=yes name="apple-mobile-web-app-capable"><meta content=yes name="apple-touch-fullscreen"><meta content="telephone=no,email=no" name="format-detection"><link rel=stylesheet href=../dist/css/main.css><link rel=stylesheet type=text/css href=../dist/lib/animate.min.css><link rel=stylesheet type=text/css href=../dist/lib/swiper.min.css><link rel=stylesheet type=text/css href=http://news.sohu.com/upload/commonzzx/normal.css><script src=../dist/lib/zepto.min.js></script><script src=http://news.sohu.com/upload/commonzzx/preload.js></script><script type=text/javascript src=../dist/lib/swiper.jquery.min.js></script><script type=text/javascript src=../dist/lib/Tween.min.js></script><title>template</title><style type=text/css>*{padding: 0;margin: 0;}
 		html,body,.main{
 			height: 100%;
 			overflow: hidden;
 			background: rgb(27,27,27);
 		}
-		.swiper-container,.swiper-wrapper,.swiper-slide{
-			height: 100%;
-		}
+	
 
-		.outer{
+		/*.outer>.swiper-wrapper{
 			background: url(../dist/img/bg.png);
+		}*/
+		.swiper-container{
+			height:100%;
 		}
 
 		#btn{
 			width: 100px;
 			height: 100px;
+			position: absolute;left: 0;top: 0;
+			z-index: 10;
 		}</style><body><div class=loading><div class=pace><div class=pace-progress>0</div></div></div><script type=text/javascript>function pageUtil(selector){
 			this.ele = document.querySelectorAll(selector)[0];
 			this.scaleNum = document.documentElement.clientWidth/640;
@@ -29,18 +32,35 @@
 			"-webkit-transform-origin:0 0; position: absolute; top: 50%; left: 50%;"
 			return this;
 		}
+		var innerSwiper;
 
 
 		  // 自适应屏幕配置
 		function initView() {
 			new pageUtil(".main").response(1008);
 		    var swiper = new Swiper('.outer',{
-		    	direction:"vertical"
+		    	touchRatio : 2,
+		    	direction:"vertical",
+		    	onSlideChangeEnd: function(swiper){
+			    	if(swiper.activeIndex==1){
+			    		$(".tip").addClass("animated bounceIn");
+						setTimeout(function(){
+							$(".tip").removeClass("animated");	
+						},1800);
+			    	}	
+			    }
 		    });
 
-		    var innerSwiper = new Swiper(".inner",{
+		    innerSwiper = new Swiper(".inner",{
 		    	direction:"horizontal",
-		    	loop:"true"
+
+// 		    	freeMode : true,
+// freeModeSticky : true,
+		    	watchSlidesProgress : true,
+				watchSlidesVisibility : true,
+				slidesPerView:3,
+				loop:true,
+				pagination : '.swiper-pagination'
 		    });
 	    }
 
@@ -59,7 +79,7 @@
 		      initView();
 		    }
 		});
-		loader.start();</script><div class=main><div class="swiper-container outer"><div class=swiper-wrapper><div class=swiper-slide data-index=0><div class=titlePic></div><div id=screen_2><button id=btn>点我</button><div class=ctn></div></div><input type=button class=btn value=click></div><div class=swiper-slide data-index=1><div class="swiper-container inner"><div class=swiper-wrapper><div class=swiper-slide><img class=pic src=../dist/img/pic1.jpg width=100% alt=""></div><div class=swiper-slide><img class=pic src=http://news.sohu.com/upload/yursilewrj1913/imgs/wrj5.jpg width=100% alt=""></div></div></div></div><div class=swiper-slide data-index=2><img class=pic src=http://news.sohu.com/upload/yursilewrj1913/imgs/wrj3.jpg width=100% alt=""></div></div></div></div><script type=text/javascript src=../dist/js/main.min.js></script><script type=text/javascript>(function(){
+		loader.start();</script><div class=main><div class="swiper-container outer"><div class=swiper-wrapper><div class="swiper-slide outer1" data-index=0><div id=screen_2><div class=titlePic></div><div class=ctn></div><div class=smoke></div></div></div><div class="swiper-slide outer2" data-index=1><div class=fires></div><div class=word></div><div class=button></div><div class=buttonBg></div><div class=left></div><div class=right></div><div class=tip></div><div class="swiper-container inner"><div class=swiper-wrapper><div class="swiper-slide inner-slide inner1"></div><div class="swiper-slide inner-slide inner2"></div><div class="swiper-slide inner-slide inner3"></div><div class="swiper-slide inner-slide inner4"></div><div class="swiper-slide inner-slide inner5"></div><div class="swiper-slide inner-slide inner6"></div><div class="swiper-slide inner-slide inner7"></div><div class="swiper-slide inner-slide inner8"></div><div class="swiper-slide inner-slide inner9"></div><div class="swiper-slide inner-slide inner10"></div></div><div class=swiper-pagination></div></div></div></div></div><div class=result-container><img class=pic src=../dist/img/result1.gif width=100% alt=""></div></div><script type=text/javascript src=../dist/js/main.min.js></script><script type=text/javascript>(function(){
 			var  imgUrl= 'http://news.sohu.com/upload/papa/images/share.jpg';
 			var link = window.location.href;
 			var title='打脸啪啪啪！被玩坏了的体坛工资单';
